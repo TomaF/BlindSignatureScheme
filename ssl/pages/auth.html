@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src='/socket.io/socket.io.js'></script>
+    <script src="https://localhost:3333/socket.io/socket.io.js"></script>
+      <script>
+        function authentification(){
+            try{
+            var data = {};
+            data.login = document.form1.login.value;
+            data.password = document.form1.password.value;
+            var socket = io('/registration');
+            socket.emit('fill db', data);
+        }catch(error){
+            alert(error);
+            }
+        }
+        </script>
+</head>
+
+<body>
+<button onclick="location.href='/'"> HOME</button><br/>
+<form name="form1">
+<h1>Init values</h1>
+login: <br/><textarea name="login" rows="3" cols="72"></textarea><br/>
+password: <br/><textarea name="password" rows="3" cols="72"></textarea><br/>
+<input type="button" value="Log in" onClick="authentification();"/><br/>
+</form>
+</body>
+</html>

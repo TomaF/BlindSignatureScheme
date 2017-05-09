@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+    <head>
+        <script src='/socket.io/socket.io.js'></script>
+		 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script>
+            var socket = io('/showlog');
+
+            socket.on('get log', function(data) {
+                addData(data);
+            });
+            function addData(data) {
+                var rows = "";
+				$.each(data, function(){
+				rows += "<tr><td>" + this.id + "</td><td>" + this.vote + "</td><td>"+ this.decrvote + "</td><td>" + this.x + "</td><td><div>" + this.c + "</div><td><div>" + this.s + "</div></td></tr>";
+				});
+				$( rows ).appendTo( "#userlog tbody" );
+            }
+        </script>
+		<style>
+ table {
+    border-collapse: collapse;
+    width: 95%;
+}
+table, th, td {
+    border: 1px solid black;
+}
+td {
+	max-width:300px;
+	word-wrap:break-word;
+ }
+</style>
+    </head>
+    <body>
+		<button onclick="location.href='/'"> HOME</button><br/>
+		<table id="userlog">
+			<thead>
+				<tr>
+					<td>id</td>
+					<td>encrypted vote</td>
+					<td>decrypted vote</td>
+					<td >x</td>
+					<td>c</td>
+					<td>s</td>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>	
+		</table>
+    </body>
+</html>

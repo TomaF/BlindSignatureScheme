@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script type="text/javascript" src="index.js"></script>
+     <script src='/socket.io/socket.io.js'></script>
+    <script type="text/javascript" src="cryptotools.js"></script>
+    <script type="text/javascript" src="blind_test.js"></script>
+    <script type="text/javascript" src="biginteger.js"></script>
+     <script>
+       var socket = io('/registration');
+	   socket.on('init', function(data) {
+       try{
+                document.form1.pkeyStr.value = data.pkey;
+                document.form1.n.value = data.n;
+       } catch(error){
+        alert(error);
+       }
+        
+        });
+        </script>
+</head>
+<body onload="init()">
+<button onclick="location.href='/'"> HOME</button><br/>
+<form name="form1">
+<h1>Init values</h1>
+pkey: <br/><textarea name="pkeyStr" rows="3" cols="72"></textarea><br/>
+N: <br/><textarea name="n" rows="3" cols="72"></textarea><br/>
+x: <br/><textarea name="x" rows="3" cols="72"></textarea><br/>
+<input type="button" value="Generate x" onClick="generateToken();"/><br/>
+z: <br/><textarea name="z" rows="3" cols="72">2</textarea><br/>
+<input type="button" value="Generate z" onClick="generatePrime();"/><br/>
+password:<br/> <textarea name="password" rows="3" cols="72"></textarea><br/>
+user id:<br/> <textarea name="id" rows="3" cols="72"></textarea><br/>
+<h3>Generate p</h3>
+<input type="button" value="Generate p" onClick="testRegistration();"/><br/>
+salt:<br/><textarea name="salt" rows="3" cols="72"></textarea><br/>
+Hash(x): <br/><textarea name="hash" rows="3" cols="72"></textarea><br/>
+AES(x): <br/><textarea name="aesX" rows="3" cols="72"></textarea><br/>
+AES(z): <br/><textarea name="aesZ" rows="3" cols="72"></textarea><br/>
+p: <br/><textarea name="p" rows="3" cols="72"></textarea><br/>
+<input type="button" value="Send to server" onClick="sendToServer();"/><br/>
+</form>
+</body>
+</html>

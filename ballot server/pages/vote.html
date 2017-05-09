@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="index.js"></script>
+    <script src='/socket.io/socket.io.js'></script>
+    <script type="text/javascript" src="cryptotools.js"></script>
+    <script type="text/javascript" src="ballot_functions.js"></script>
+    <script type="text/javascript" src="biginteger.js"></script> 
+    <script src="https://localhost:3333/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+</head>
+
+<body>
+<button onclick="location.href='/'"> HOME</button><br/>
+<form name="form1">
+<h1>Init values</h1>
+user id: <br/><textarea name="id" rows="3" cols="72"></textarea><br/>
+password for x and z decryption: <br/> <textarea name="password" rows="3" cols="72"></textarea><br/>
+<input type="button" value="Get values from DB" onClick="cast();"/><br/>
+<h1>Response</h1>
+N: <br/><textarea name="n" rows="3" cols="72"></textarea><br/>
+publicKeyPem: <br/><textarea name="publicKeyPem" rows="3" cols="72"></textarea><br/>
+Pkey: <br/><textarea name="pkey" rows="3" cols="72"></textarea><br/>
+AES(x): <br/><textarea name="aesX" rows="3" cols="72"></textarea><br/>
+AES(z): <br/><textarea name="aesZ" rows="3" cols="72"></textarea><br/>
+Sign(p): <br/><textarea name="signature" rows="3" cols="72"></textarea><br/>
+Salt: <br/><textarea name="salt" rows="3" cols="72"></textarea><br/>
+decrypted x: <br/><textarea name="decrx" rows="3" cols="72"></textarea><br/>
+decrypted z: <br/><textarea name="decrz" rows="3" cols="72"></textarea><br/>
+Hash(x): <br/><textarea name="hash" rows="3" cols="72"></textarea><br/>
+<div id="qrcode" style="width:300px; height:300px; margin-top:15px;"></div>
+<h3>Sign on H(x)</h3>
+Sign(H(x)): <br/><textarea name="signHx" rows="3" cols="72"></textarea><br/>
+Is signature for H(x) valid?: <br/><textarea name="verify" rows="3" cols="72"></textarea><br/>
+<input type="button" value="Create new signature" onClick="testCreateSign();"/><br/>
+<h3>Cast vote</h3>
+Vote: <br/><textarea name="vote" rows="3" cols="72">your vote</textarea><br/>
+Encrypted vote: <br/><textarea name="encvote" rows="3" cols="72"></textarea><br/>
+<input type="button" value="Vote" onClick="castVote();"/><br/>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="index.js"></script>
+    <script src='/socket.io/socket.io.js'></script>
+    <script type="text/javascript" src="cryptotools.js"></script>
+    <script type="text/javascript" src="ballot_functions.js"></script>
+    <script type="text/javascript" src="biginteger.js"></script>
+</head>
+
+<body>
+<button onclick="location.href='/'"> HOME</button><br/>
+<form name="form1">
+<h1>Init values</h1>
+vote id: <br/><textarea name="id" rows="3" cols="72"></textarea><br/>
+<input type="button" value="Get values from DB" onClick="getSignature();"/><br/>
+<h1>Response</h1>
+N: <br/><textarea name="n" rows="3" cols="72"></textarea><br/>
+Pkey: <br/><textarea name="pkey" rows="3" cols="72"></textarea><br/>
+Encrypted vote: <br/><textarea name="encr" rows="3" cols="72"></textarea><br/>
+x: <br/><textarea name="x" rows="3" cols="72"></textarea><br/>
+s: <br/><textarea name="s" rows="3" cols="72"></textarea><br/>
+c: <br/><textarea name="c" rows="3" cols="72"></textarea><br/>
+Is signature for H(x) valid?: <br/><textarea name="verify" rows="3" cols="72"></textarea><br/>
+</form>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="qcode-decoder.min.js"></script>
+    <script src='/socket.io/socket.io.js'></script>
+<script>
+function previewFile(){
+    try{
+       var preview = document.querySelector('img'); //selects the query named img
+       var file    = document.querySelector('input[type=file]').files[0]; //sames as here
+       var reader  = new FileReader();
+       reader.onloadend = function () {
+           preview.src = reader.result;
+           QCodeDecoder().decodeFromImage(reader.result,function(er,res){
+       document.form1.hash.value = res;
+       //alert(res);
+         var socket = io('/myvote');
+         socket.emit('get vote', res);
+         socket.on('vote', function(data){
+            if(data.hasOwnProperty('error')){
+                    alert(data.error);
+                    return;
+                }
+            document.form1.vote.value = data.decrvote || 'has not been decrypted yet';
+            document.form1.encr.value = data.vote;
+            document.form1.valid.value = data.verify;
+            });
+  });
+       };
+
+       if (file) {
+           reader.readAsDataURL(file); //reads the data as a URL
+       } else {
+           preview.src = "";
+       }
+    } catch(error){
+        alert(error);
+    }
+  }
+
+</script>
+</head>
+
+<body>
+<button onclick="location.href='/'"> HOME</button><br/>
+<form name="form1">
+<input type="file"  onchange="previewFile()"><br>
+<img src="" height="200" alt="no qr code selected" id ='code'><br/>
+Hash(x): <br/><textarea name="hash" rows="3" cols="72"></textarea><br/>
+Your encrypted vote: <br/><textarea name="encr" rows="3" cols="72"></textarea><br/>
+Your decrypted vote: <br/><textarea name="vote" rows="3" cols="72"></textarea><br/>
+Valid?: <br/><textarea name="valid" rows="3" cols="72"></textarea><br/>
+</form>
+</body>
+</html>
